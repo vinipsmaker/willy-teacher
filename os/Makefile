@@ -4,9 +4,9 @@ LD?=ld
 
 all: kernel.bin
 
-kernel.bin: start.asm main.o dirty.o system.o
+kernel.bin: start.asm main.o dirty.o system.o scrn.o
 	$(NASM) start.asm -f elf -o start.o
-	$(LD) -T link.ld -o kernel.bin start.o main.o dirty.o system.o
+	$(LD) -T link.ld -o kernel.bin start.o main.o dirty.o system.o scrn.o
 
 main.o: main.c
 	$(CC) -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o main.o main.c
@@ -17,5 +17,8 @@ dirty.o: dirty.c
 system.o: system.c
 	$(CC) -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o system.o system.c
 
+scrn.o: scrn.c
+	$(CC) -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o scrn.o scrn.c
+
 clean:
-	rm -f start.o kernel.bin main.o dirty.o system.o
+	rm -f start.o kernel.bin main.o dirty.o system.o scrn.o

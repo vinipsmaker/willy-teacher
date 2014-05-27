@@ -1,9 +1,11 @@
 #include "system.h"
 #include "dirty.h"
+#include "scrn.h"
 
 void main()
 {
-    /* You would add commands after here */
+    init_video();
+    puts((unsigned char*)"Hello World!");
 
     /* [[noreturn]] function */
     for (;;);
