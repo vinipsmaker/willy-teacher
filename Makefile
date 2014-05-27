@@ -1,14 +1,11 @@
-AS?=as
+NASM?=yasm
 LD?=ld
 DD?=dd
 
 all: floppy.img
 
-bootloader.o: bootloader.S
-	$(AS) bootloader.S -o bootloader.o
-
-bootloader.bin: bootloader.o
-	$(LD) -Ttext 0x7c00 --oformat=binary bootloader.o -o bootloader.bin
+bootloader.bin: bootloader.asm
+	$(NASM) bootloader.asm -f bin -o bootloader.bin
 
 floppy.img: bootloader.bin
 	$(DD) if=/dev/zero of=floppy.img bs=512 count=2880
